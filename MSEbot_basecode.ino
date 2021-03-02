@@ -257,7 +257,7 @@ void loop(){
           }
           case 1: //go forward
           {
-            ENC_SetDistance(200, 200);
+            ENC_SetDistance(280, 300);
             ucMotorState = 1;
             CR1_ui8LeftWheelSpeed = 255;
             CR1_ui8RightWheelSpeed = 202;
@@ -275,7 +275,7 @@ void loop(){
           }
           case 3: //go forward again
           {
-            ENC_SetDistance(140, 240);
+            ENC_SetDistance(195, 240);
             ucMotorState = 1;
             CR1_ui8LeftWheelSpeed = 255;
             CR1_ui8RightWheelSpeed = 202;
@@ -293,7 +293,7 @@ void loop(){
           }
           case 5: //go forward again
           {
-            ENC_SetDistance(230, 300);
+            ENC_SetDistance(315, 300);
             ucMotorState = 1;
             CR1_ui8LeftWheelSpeed = 255;
             CR1_ui8RightWheelSpeed = 202;
@@ -311,7 +311,7 @@ void loop(){
           }
           case 7: //go forward again
           {
-            ENC_SetDistance(140, 300);
+            ENC_SetDistance(470, 300);
             ucMotorState = 1;
             CR1_ui8LeftWheelSpeed = 255;
             CR1_ui8RightWheelSpeed = 202;
@@ -343,9 +343,9 @@ void loop(){
             ucMotorStateIndex = 11;
             break;
           }
-          case 11: //turn around
+          case 11: //celebratory circle
           {
-            ENC_SetDistance(40, 200);
+            ENC_SetDistance(200, 200);
             ucMotorState = 2;
             CR1_ui8LeftWheelSpeed = 255;
             CR1_ui8RightWheelSpeed = 200;
