@@ -257,22 +257,76 @@ void loop(){
           }
           case 1: //go forward
           {
-            ENC_SetDistance(700, 300);
+            ENC_SetDistance(200, 200);
             ucMotorState = 1;
             CR1_ui8LeftWheelSpeed = 255;
-            CR1_ui8RightWheelSpeed = 209;
+            CR1_ui8RightWheelSpeed = 202;
             ucMotorStateIndex = 2;
             break;
           }
-          case 2: //look for beacon
+          case 2: //turn left
           {
-            ENC_SetDistance(-4, 41);
+            ENC_SetDistance(69, 38);
+            ucMotorState = 2;
+            CR1_ui8LeftWheelSpeed = 255;
+            CR1_ui8RightWheelSpeed = 201;
+            ucMotorStateIndex = 3;
+            break;
+          }
+          case 3: //go forward again
+          {
+            ENC_SetDistance(140, 240);
+            ucMotorState = 1;
+            CR1_ui8LeftWheelSpeed = 255;
+            CR1_ui8RightWheelSpeed = 202;
+            ucMotorStateIndex = 4;
+            break;
+          }
+          case 4: //turn right
+          {
+            ENC_SetDistance(-14, 41);
+            ucMotorState = 3;
+            CR1_ui8LeftWheelSpeed = 255;
+            CR1_ui8RightWheelSpeed = 201;
+            ucMotorStateIndex = 5;
+            break;
+          }
+          case 5: //go forward again
+          {
+            ENC_SetDistance(230, 300);
+            ucMotorState = 1;
+            CR1_ui8LeftWheelSpeed = 255;
+            CR1_ui8RightWheelSpeed = 202;
+            ucMotorStateIndex = 6;
+            break;
+          }
+          case 6: //turn right again
+          {
+            ENC_SetDistance(-16, 41);
+            ucMotorState = 3;
+            CR1_ui8LeftWheelSpeed = 255;
+            CR1_ui8RightWheelSpeed = 201;
+            ucMotorStateIndex = 7;
+            break;
+          }
+          case 7: //go forward again
+          {
+            ENC_SetDistance(140, 300);
+            ucMotorState = 1;
+            CR1_ui8LeftWheelSpeed = 255;
+            CR1_ui8RightWheelSpeed = 202;
+            ucMotorStateIndex = 8;
+            break;
+          }
+          case 8: //look for beacon
+          {
+            ENC_SetDistance(-5, 41);
             ucMotorState = 3;
             CR1_ui8LeftWheelSpeed = 255;
             CR1_ui8RightWheelSpeed = 201;
             break;
           }
-          case 3: //go to beacon
+          case 9: //go to beacon
           {
             ENC_SetDistance(200, 200);
             ucMotorState = 1;
@@ -280,40 +334,40 @@ void loop(){
             CR1_ui8RightWheelSpeed = 202;
             break;
           }
-          case 4: //go backwards
+          case 10: //go backwards
           {
-            ENC_SetDistance(150, 20);
+            ENC_SetDistance(80, 20);
             ucMotorState = 4;
             CR1_ui8LeftWheelSpeed = 255;
-            CR1_ui8RightWheelSpeed = 207;
-            ucMotorStateIndex = 5;
+            CR1_ui8RightWheelSpeed = 199;
+            ucMotorStateIndex = 11;
             break;
           }
-          case 5: //turn around
+          case 11: //turn around
           {
-            ENC_SetDistance(-40, 41);
-            ucMotorState = 3;
+            ENC_SetDistance(40, 200);
+            ucMotorState = 2;
             CR1_ui8LeftWheelSpeed = 255;
-            CR1_ui8RightWheelSpeed = 201;
-            ucMotorStateIndex = 6;
+            CR1_ui8RightWheelSpeed = 200;
+            ucMotorStateIndex = 12;
             break;
           }
-          case 6: //raise flag
+          case 12: //raise flag
           {
             Position = 1;
             servoPos = map(Position, 0, 2, 0, 180);
             ledcWrite(servoChannel, degreesToDutyCycle(servoPos));
-            ucMotorStateIndex = 7;
-            //Serial.println(servoPos);
+            ucMotorStateIndex = 13;
+            Serial.println(servoPos);
             break;
           }
-          case 7: //lower flag
+          case 13: //lower flag
           {
             Position = 0;
             servoPos = map(Position, 0, 2, 0, 180);
             ledcWrite(servoChannel, degreesToDutyCycle(servoPos)); 
-            ucMotorStateIndex = 8;
-            //Serial.println(servoPos);
+            ucMotorStateIndex = 14;
+            Serial.println(servoPos);
             break;
           }
          }
@@ -326,29 +380,29 @@ void loop(){
 
     case 1:
     {
-      if(CR1_ui8IRDatum == 0x55 && ucMotorStateIndex == 2){
+      if(CR1_ui8IRDatum == 0x55 && ucMotorStateIndex == 8){
               ledcWrite(2,255);
               ledcWrite(1,255);
               ledcWrite(4,255);
               ledcWrite(3,255);
-              ucMotorStateIndex = 1;
-      }
+              ucMotorStateIndex = 9;
+            }
+      //if(CR1_ui8IRDatum == 0x41 && ucMotorStateIndex == 9){
+              //ledcWrite(2,255);
+              //ledcWrite(1,255);
+              //ledcWrite(4,255);
+              //ledcWrite(3,255);
+              //ucMotorStateIndex = 10;
+            //}
 
-      if(CR1_ui8IRDatum != 0x55 && ucMotorStateIndex == 1){
-              ledcWrite(2,255);
-              ledcWrite(1,255);
-              ledcWrite(4,255);
-              ledcWrite(3,255);
-              ucMotorStateIndex = 2;
-      }
-      
+         
         if(!digitalRead(ciLimitSwitch))
         {
           ledcWrite(2,255);
           ledcWrite(1,255);
           ledcWrite(4,255);
           ledcWrite(3,255);
-          ucMotorStateIndex = 4;
+          ucMotorStateIndex = 10;
           Serial.println(digitalRead(ciLimitSwitch));
         }
             
